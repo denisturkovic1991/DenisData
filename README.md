@@ -45,13 +45,6 @@ Moj plan učenja i certificiranja po kvartalima:
 
 ---
 
-## 📖 O Projektu
-
-**EcoDrive AI** je skalabilni *End-to-End Analytics Engineering* projekt dizajniran za obradu telemetrijskih podataka električnih vozila (EV). Za razliku od standardnih dashboarda, ovaj sustav simulira real-time "pingove" vozila, koristi napredne SQL algoritme za **sessionizaciju** (detekciju vožnji i punjenja) i priprema **Gold Layer** podatke za poslovno izvještavanje.
-
-Projekt prati modernu **ELT (Extract, Load, Transform)** arhitekturu, s fokusom na modularnost, kvalitetu podataka i performanse.
-
----
 
 ## 📈 Roadmap (Plan Razvoja)
 
