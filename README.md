@@ -34,15 +34,12 @@ Moj plan učenja i certificiranja po kvartalima:
 
 ---
 
+
+
+
 ## 📂 Izdvojeni Projekti
 
 # 🚗 EcoDrive AI: Intelligent EV Fleet Optimization System
-
-![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791)
-![PowerBI](https://img.shields.io/badge/Reporting-PowerBI-F2C811)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 > **Business Value:** Transformacija sirovih IoT podataka u konkretne odluke za smanjenje troškova flote i optimizaciju trajanja baterije.
 
@@ -67,6 +64,8 @@ Ovaj projekt prati moj razvojni put od Data Analysta do Analytics Engineera.
 
 ---
 *Projekt je razvijen kao dio intenzivnog Analytics Engineering bootcampa (2026).*
+
+
 
 ## 📫 Kontaktirajte me
 
