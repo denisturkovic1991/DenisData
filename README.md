@@ -42,18 +42,6 @@ Moj plan učenja i certificiranja po kvartalima:
 # 🚗 EcoDrive AI: Intelligent EV Fleet Optimization System
 
 ---
-
-
-## 📈 Roadmap (Plan Razvoja)
-
-Ovaj projekt prati moj razvojni put od Data Analysta do Analytics Engineera.
-
-- [x] **Q1 2026:** Python Ingestion & PostgreSQL Core (In Progress) 
-- [ ] **Q2 2026:** Advanced Analytics (Sessionization) & Power BI
-- [ ] **Q3 2026:** Migracija na **dbt** (Data Build Tool) i uvođenje CI/CD testova.
-- [ ] **Q4 2026:** Skaliranje na **Azure Cloud** (Databricks/Fabric) i Big Data processing.
-
----
 *Projekt je razvijen kao dio intenzivnog Analytics Engineering bootcampa (2026).*
 
 
