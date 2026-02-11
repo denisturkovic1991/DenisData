@@ -44,6 +44,36 @@ Moj plan učenja i certificiranja po kvartalima:
 
 ---
 
+# ☀️ Global Renewable Energy Pipeline
+
+### End-to-End Analytics Engineering Project
+
+![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
+![Platform](https://img.shields.io/badge/Platform-Azure%20%7C%20Databricks-blue)
+![Tools](https://img.shields.io/badge/Tools-dbt%20%7C%20PySpark%20%7C%20PowerBI-orange)
+
+## 📖 O Projektu
+
+Ovaj projekt demonstrira izgradnju modernog data pipelinea za analizu učinkovitosti solarnih elektrana. Cilj je simulirati stvarni scenarij gdje se senzorski podaci (IoT) ingestiraju, čiste, transformiraju i prezentiraju poslovnim korisnicima za donošenje odluka.
+
+**Glavni cilj:** Omogućiti praćenje proizvodnje energije u stvarnom vremenu i identificirati panele s niskom učinkovitošću.
+
+---
+
+## 🏗️ Arhitektura (Medallion Architecture)
+
+Podaci putuju kroz standardnu "Bronze-Silver-Gold" arhitekturu koristeći **Azure Databricks** i **dbt**:
+
+```mermaid
+graph LR
+    A[Raw Sensor Data] -->|Ingestion/PySpark| B[(Bronze Layer\nRaw Data Lake)]
+    B -->|Cleaning/dbt| C[(Silver Layer\nCleaned Tables)]
+    C -->|Modeling/dbt| D[(Gold Layer\nStar Schema)]
+    D -->|Semantic Layer| E[Power BI Dashboard]
+
+
+
+
 ## 📜 Certifikati (Ciljevi za 2026.)
 
 - [ ] **PL-300:** Microsoft Power BI Data Analyst (Plan: Lipanj 2026.)
