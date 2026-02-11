@@ -130,15 +130,9 @@ Sirovi GPS podaci su "šum". Sustav koristi SQL `WINDOW` funkcije (`LAG`, `LEAD`
 Ovaj projekt prati moj razvojni put od Data Analysta do Analytics Engineera.
 
 - [x] **Q1 2026:** Python Ingestion & PostgreSQL Core (Završeno) ✅
-- [x] **Q2 2026:** Advanced Analytics (Sessionization) & Power BI (Završeno) ✅
+- [] **Q2 2026:** Advanced Analytics (Sessionization) & Power BI
 - [ ] **Q3 2026:** Migracija na **dbt** (Data Build Tool) i uvođenje CI/CD testova.
 - [ ] **Q4 2026:** Skaliranje na **Azure Cloud** (Databricks/Fabric) i Big Data processing.
-
----
-
-## 📬 Kontakt
-
-**[Tvoje Ime]** *Aspiring Analytics Engineer* [LinkedIn Profil] | [Portfolio Link]
 
 ---
 *Projekt je razvijen kao dio intenzivnog Analytics Engineering bootcampa (2026).*
