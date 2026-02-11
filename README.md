@@ -41,8 +41,6 @@ Moj plan učenja i certificiranja po kvartalima:
 
 # 🚗 EcoDrive AI: Intelligent EV Fleet Optimization System
 
-> **Business Value:** Transformacija sirovih IoT podataka u konkretne odluke za smanjenje troškova flote i optimizaciju trajanja baterije.
-
 ---
 
 
