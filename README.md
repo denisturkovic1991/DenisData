@@ -15,8 +15,9 @@ Ovdje su alati i tehnologije na koje se fokusiram:
 | **Data Modeling & SQL** | PostgreSQL, Star Schema, Relational Databases 🏗️ |
 | **BI & Visualization** | Microsoft Power BI (Desktop & Service), Data Storytelling 📊 |
 | **Analytics Engineering** | dbt (Data Build Tool), Git/Version Control ⚙️ |
-| **Big Data & Cloud** | Microsoft Fabric, Azure Databricks, PySpark ☁️ |
 | **Programming** | Python (Pandas, Polars), Prompt Engineering 🐍 |
+| **Big Data & Cloud** | Microsoft Fabric, Azure Databricks, PySpark ☁️ |
+
 
 ---
 
