@@ -532,8 +532,6 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## 📫 Kontaktirajte me
 
-Otvoren sam za diskusiju o podacima, suradnji ili savjetima za karijeru!
-
 * [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/denis-turkovi%C4%87-1975a0125/)
 * 📧 **Email:** denis.turkovic91@gmail.com
 
