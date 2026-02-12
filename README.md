@@ -257,13 +257,23 @@ ecodrive-ai/
 ├── LICENSE                            # MIT License
 ├── CHANGELOG.md                       # Version history per quarter
 ├── .gitignore                         # Git ignore rules
+├── .env.example                       # Environment variable template
 │
 ├── docs/                              # Project documentation
 │   ├── PROJECT_ROADMAP.md             # Detailed quarterly roadmap
 │   ├── DATA_DICTIONARY.md             # Column-level data documentation
+│   ├── DATA_SOURCES.md                # External API registry & documentation
 │   ├── BUSINESS_REQUIREMENTS.md       # BRD document
 │   ├── ARCHITECTURE.md                # Architecture decision records
 │   └── LEARNING_LOG.md                # Personal learning journal
+│
+├── config/                            # Configuration files
+│
+├── scripts/                           # Operational scripts
+│   ├── backup/
+│   │   └── backup.sh                 # Automated backup (full/diff/validate/cleanup)
+│   └── monitoring/
+│       └── healthcheck.sh            # System health check (DB/backups/alerts/sources)
 │
 ├── data/                              # Data files (gitignored for large files)
 │   ├── raw/                           # Original, immutable data
@@ -272,8 +282,13 @@ ecodrive-ai/
 │
 ├── src/                               # Source code, organized by quarter
 │   ├── q1_foundations/                 # Q1: SQL, Excel, Statistics
-│   │   ├── sql/                       # DDL, DML, analytical queries
-│   │   │   ├── schema/                # Table creation scripts
+│   │   ├── sql/
+│   │   │   ├── schema/
+│   │   │   │   ├── 001_create_database.sql        # DB & user creation
+│   │   │   │   ├── 002_create_tables.sql          # Core tables + star schema
+│   │   │   │   ├── 003_create_source_tables.sql   # External API landing tables
+│   │   │   │   ├── 004_create_notification_system.sql  # Alert rules & triggers
+│   │   │   │   └── 005_create_backup_system.sql   # Backup tracking & validation
 │   │   │   ├── seed/                  # Data seeding scripts
 │   │   │   ├── queries/               # Analytical queries
 │   │   │   └── views/                 # Database views
@@ -281,40 +296,12 @@ ecodrive-ai/
 │   │   └── statistics/                # Statistical analysis scripts
 │   │
 │   ├── q2_visualization/              # Q2: Power BI, Storytelling
-│   │   ├── powerbi/                   # .pbix files and data models
-│   │   ├── reports/                   # Exported reports and PDFs
-│   │   └── python_basics/             # Introductory Python scripts
-│   │
 │   ├── q3_engineering/                # Q3: Python, dbt, AI
-│   │   ├── etl/                       # Python ETL pipelines
-│   │   ├── dbt_ecodrive/              # dbt project root
-│   │   │   ├── models/
-│   │   │   │   ├── staging/
-│   │   │   │   ├── intermediate/
-│   │   │   │   └── marts/
-│   │   │   ├── tests/
-│   │   │   └── macros/
-│   │   └── ai_workflows/              # GenAI-assisted analysis
-│   │
 │   ├── q4_cloud/                      # Q4: Azure, Databricks, Spark
-│   │   ├── azure/                     # ARM templates, config
-│   │   ├── databricks/                # Notebooks
-│   │   ├── spark/                     # PySpark scripts
-│   │   └── data_factory/              # ADF pipeline definitions
-│   │
 │   └── q5_portfolio/                  # Q5: Fabric, Final Integration
-│       ├── fabric/                    # Fabric artifacts
-│       └── demo/                      # Demo scripts, video assets
 │
 ├── tests/                             # Test suites
-│   ├── sql/                           # SQL test queries
-│   └── python/                        # Python unit tests
-│
-├── notebooks/                         # Jupyter notebooks for exploration
-│
-└── .github/
-    └── workflows/                     # CI/CD pipelines
-        └── ci.yml                     # Linting, testing automation
+└── .github/workflows/ci.yml          # CI/CD pipeline
 ```
 
 ---
@@ -336,16 +323,144 @@ ecodrive-ai/
 git clone https://github.com/<your-username>/ecodrive-ai.git
 cd ecodrive-ai
 
-# Set up PostgreSQL database
+# Copy and configure environment
+cp .env.example .env
+# Edit .env with your PostgreSQL credentials and API keys
+
+# 1. Create database and users
 psql -U postgres -f src/q1_foundations/sql/schema/001_create_database.sql
+
+# 2. Create core tables (operational + analytical)
 psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/schema/002_create_tables.sql
 
-# Seed sample data
-psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/seed/001_seed_vehicles.sql
-psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/seed/002_seed_routes.sql
+# 3. Create external data source landing tables
+psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/schema/003_create_source_tables.sql
 
-# Run analytical queries
-psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/queries/001_fleet_overview.sql
+# 4. Set up notification & alert system
+psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/schema/004_create_notification_system.sql
+
+# 5. Set up backup tracking system
+psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/schema/005_create_backup_system.sql
+
+# 6. Make scripts executable
+chmod +x scripts/backup/backup.sh
+chmod +x scripts/monitoring/healthcheck.sh
+
+# 7. Run health check
+./scripts/monitoring/healthcheck.sh
+
+# 8. Seed sample data (coming next)
+# psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/seed/001_seed_vehicles.sql
+```
+
+---
+
+## External Data Sources (Real / Official)
+
+All data is sourced from **real, official APIs** — not synthetic where avoidable. See [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) for full documentation.
+
+| Source | Provider | Type | Data Used |
+|--------|----------|------|-----------|
+| 🌦️ Weather | [Open-Meteo](https://open-meteo.com/) | REST API (free) | Hourly temp, rain, wind for fleet cities |
+| ⚡ Electricity Prices | [ENTSO-E](https://transparency.entsoe.eu/) | REST API (free key) | Day-ahead EUR/MWh prices for Croatia |
+| 🔌 Charging Stations | [Open Charge Map](https://openchargemap.org/) | REST API (free key) | Real station locations, charger types, power |
+| 🚗 EV Specs | [EV Database](https://ev-database.org/) | Web/CSV | Battery capacity, range, efficiency per model |
+| 🗺️ Routes | [OSRM](http://project-osrm.org/) | REST API (free) | Real road distances & durations via OpenStreetMap |
+| 🏦 Holidays/Tariffs | [data.gov.hr](https://data.gov.hr/) + [HEP](https://www.hep.hr/) | CSV/Published | Croatian holidays, HEP VT/NT tariff rates |
+| 💱 Currency | [HNB API](https://api.hnb.hr/) | REST API (free) | Croatian National Bank exchange rates |
+
+All raw data lands in a dedicated `raw_sources` schema with full ingestion audit logging.
+
+---
+
+## 💾 Backup System
+
+Follows the **3-2-1 backup rule**: 3 copies, 2 storage types, 1 offsite.
+
+| Schedule | Type | Frequency | Retention | Command |
+|----------|------|-----------|-----------|---------|
+| Full database | `pg_dump` custom | Weekly (Sun 02:00) | 90 days | `./scripts/backup/backup.sh full` |
+| Differential | Data-only dump | Daily (Mon-Sat 03:00) | 30 days | `./scripts/backup/backup.sh differential` |
+| Critical tables | CSV export | Hourly | 7 days | `./scripts/backup/backup.sh tables` |
+| Validate backup | Checksum + restore test | Daily (06:00) | — | `./scripts/backup/backup.sh validate` |
+| Cleanup expired | Auto-delete | Weekly (Sun 05:00) | — | `./scripts/backup/backup.sh cleanup` |
+
+**Features:**
+- SHA-256 checksum verification on every backup
+- Automated anomaly detection (unexpected row count changes)
+- Database-tracked backup history with status dashboard (`backup_mgmt.v_latest_backups`)
+- Backup failure triggers immediate notification via alert system
+- Q4 expansion: Azure Blob Storage offsite replication
+
+---
+
+## 🔔 Notification & Alert System
+
+Database-native alerting with PostgreSQL triggers that fire automatically on data changes.
+
+### Alert Rules (13 pre-configured)
+
+| Rule | Severity | Trigger | Channels |
+|------|----------|---------|----------|
+| Battery < 10% | 🔴 CRITICAL | After trip completion | Dashboard, Email, Slack |
+| Battery < 20% | 🟡 WARNING | After trip completion | Dashboard, Email |
+| Charging failed/interrupted | 🟡 WARNING | Charging event update | Dashboard, Email |
+| Peak tariff charging (>10 kWh) | 🔵 INFO | Charging completed | Dashboard |
+| Speed > 130 km/h | 🟡 WARNING | After trip completion | Dashboard, Email |
+| Vehicle → maintenance | 🟡 WARNING | Vehicle status change | Dashboard, Email |
+| Odometer > 150,000 km | 🔵 INFO | Vehicle odometer update | Dashboard, Email |
+| Daily fleet cost > €500 | 🟡 WARNING | Scheduled check | Dashboard, Email |
+| Data ingestion failed | 🔴 CRITICAL | Ingestion log update | Dashboard, Email, Slack |
+
+**Features:**
+- Cooldown periods prevent alert storms (configurable per rule)
+- Suppression windows for planned maintenance
+- Full dispatch tracking (sent/delivered/failed per channel)
+- Dashboard views: active alerts, daily summary, per-vehicle frequency
+- Q3 expansion: Python dispatcher for Email/Slack/SMS delivery
+
+### Alert Flow
+
+```
+Data Change (INSERT/UPDATE)
+       │
+       ▼
+┌─────────────────────┐
+│  PostgreSQL Trigger  │ ◄── Fires automatically
+│  (check_battery,     │
+│   check_charging,    │
+│   check_vehicle)     │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐     ┌───────────────────┐
+│  notifications.      │────▶│  v_active_alerts  │ ◄── Dashboard widget
+│  notifications       │     │  v_daily_summary  │
+│  (central store)     │     └───────────────────┘
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  Dispatch Engine     │ ◄── Q3: Python service polls & sends
+│  (Email/Slack/SMS)   │
+└─────────────────────┘
+```
+
+---
+
+## 🏥 System Health Monitoring
+
+Run `./scripts/monitoring/healthcheck.sh` for a full system health report:
+
+```
+📊 Database Connectivity .............. ✅ PASS
+📋 Core Table Health .................. ✅ PASS
+🔔 Notification System ................ ✅ PASS
+💾 Backup System ...................... ✅ PASS
+🌐 External Data Sources .............. ✅ PASS
+⚡ Database Performance ................ ✅ PASS
+
+Overall Status: ✅ HEALTHY
 ```
 
 ---
@@ -399,11 +514,18 @@ psql -U ecodrive_admin -d ecodrive -f src/q1_foundations/sql/queries/001_fleet_o
                     └──────────────┘    └──────────────┘
 ```
 
+---
+
+## Contributing
+
+This is a personal portfolio project, but feedback and suggestions are welcome! Feel free to open an issue or submit a pull request.
+
 ## License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ---
+
 *Projekt je razvijen kao dio intenzivnog Analytics Engineering bootcampa (2026).*
 
 
