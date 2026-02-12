@@ -39,8 +39,6 @@ Moj plan učenja i certificiranja po kvartalima:
 
 ## 📂 Izdvojeni Projekti
 
-# 🚗 EcoDrive AI: Intelligent EV Fleet Optimization System
-
 # 🚗⚡ EcoDrive AI: Intelligent EV Fleet Optimization System
 
 > **A progressive data engineering project** — built quarter-by-quarter as a career transition portfolio piece, demonstrating end-to-end skills from SQL foundations to cloud-scale analytics.
