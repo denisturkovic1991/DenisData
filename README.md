@@ -27,7 +27,7 @@ Moj plan učenja i certificiranja po kvartalima:
 
 | Kvartal | Fokus | Status |
 | :--- | :--- | :--- |
-| **Q1** | Excel Mastery & SQL Foundations | 🔄 **U tijeku** (Excel 75% Done) |
+| **Q1** | Excel Mastery & SQL Foundations | 🔄 **U tijeku** (Excel Done, SQL started) |
 | **Q2** | Power BI & PL-300 Certification | 📅 Planirano |
 | **Q3** | Python & dbt (The Engine Room) | 📅 Planirano |
 | **Q4** | Cloud ( Microsoft Fabric) & Spark Integration | 📅 Planirano |
