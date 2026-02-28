@@ -39,6 +39,9 @@ Moj plan učenja i certificiranja po kvartalima:
 # 🚗⚡ EcoDrive AI: Intelligent EV Fleet Optimization System
 -> https://github.com/denisturkovic1991/EcoDrive-AI.git
 
+---
+
+
 ## 📫 Kontaktirajte me
 
 * [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/denis-turkovi%C4%87-1975a0125/)
