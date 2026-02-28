@@ -2,7 +2,7 @@
 
 ### 🚀 Aspiring Analytics Engineer | Data Enthusiast
 
-Trenutno sam u procesu intenzivne promjene karijere prema **Analytics Engineeringu**. Ovaj repozitorij služi kao centralno mjesto mog napretka, projekata i tehnologija koje savladavam tijekom 2026. godine.
+Trenutno sam u procesu intenzivne promjene karijere prema **Analytics Engineeringu**. Ovaj repozitorij služi kao centralno mjesto mog napretka, projekata i tehnologija koje želim savladati tijekom 2026. godine te 1. dijelom 2027. godine.
 
 ---
 
